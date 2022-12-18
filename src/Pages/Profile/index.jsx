@@ -8,6 +8,7 @@ import Performances from "../../components/Performances";
 import KeyDatas from "../../components/KeyDatas";
 import Score from "../../components/Score";
 import getUsers from "../../services/Users";
+import getActivitiesData from "../../services/Activities";
 import Loader from "../../components/Loader";
 
 /**
@@ -16,36 +17,42 @@ import Loader from "../../components/Loader";
  */
 function Profile() {
 	const userId = 12;
-	const [userData, setUserData] = useState([]);
-	const [connectedUser, setConnectedUser] = useState();
+	const [usersData, setUsersData] = useState([]);
+	const [connectedUserInfos, setConnectedUserInfos] = useState();
+	const [usersActivitiesData, setUsersActivityData] = useState([]);
+	const [connectedUserActivity, setConnectedUserActivity] = useState();
 
 	// get users data from getUsers()
+	// get users's activities data from getActivitiesData()
 	useEffect(() => {
-		getUsers().then((data) => setUserData(data));
+		getUsers().then((data) => setUsersData(data));
+		getActivitiesData().then((data) => setUsersActivityData(data));
 	}, []);
 
 	// find the connected user with the userId in the users data
+	// find the connected user's activity with the userId in the users data
 	useEffect(() => {
-		setConnectedUser(userData.find((user) => user.id === userId));
-	}, [userData]);
+		setConnectedUserInfos(usersData.find((user) => user.id === userId));
+		setConnectedUserActivity(usersActivitiesData.find((activity) => activity.userId === userId));
+	}, [usersData, usersActivitiesData]);
 
 	return (
 		<div className={styles.profile}>
 			<NavBar />
 			<VerticalBar />
-			<div>Bonjour {!connectedUser ? <Loader /> : connectedUser.getFirstName()}</div>
-			<Activity />
+			<div>Bonjour {!connectedUserInfos ? <Loader /> : connectedUserInfos.getFirstName()}</div>
+			{!connectedUserActivity ? <Loader /> : <Activity sessions={connectedUserActivity.getSessions()} />}
 			<AverageSessions />
 			<Performances />
-			{!connectedUser ? <Loader /> : <Score lastScore={connectedUser.getLastScore()} />}
-			{!connectedUser ? (
+			{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
+			{!connectedUserInfos ? (
 				<Loader />
 			) : (
 				<KeyDatas
-					calories={connectedUser.getKiloCalories()}
-					protein={connectedUser.getProtein()}
-					carbohydrate={connectedUser.getCarbohydrate()}
-					lipid={connectedUser.getLipid()}
+					calories={connectedUserInfos.getKiloCalories()}
+					protein={connectedUserInfos.getProtein()}
+					carbohydrate={connectedUserInfos.getCarbohydrate()}
+					lipid={connectedUserInfos.getLipid()}
 				/>
 			)}
 		</div>

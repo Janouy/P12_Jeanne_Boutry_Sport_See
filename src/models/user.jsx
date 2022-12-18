@@ -17,13 +17,6 @@ export class User {
 	}
 
 	/**
-	 * Get the id value.
-	 * @return {number} The id value.
-	 */
-	getId() {
-		return this.id;
-	}
-	/**
 	 * Get the firstname value.
 	 * @return {string} The firstname value.
 	 */
