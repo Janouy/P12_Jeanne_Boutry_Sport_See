@@ -1,5 +1,6 @@
 import { UserActivity } from "../../models/userActivity";
 const { REACT_APP_ACTIVITY_MOCK } = process.env;
+
 /**
  * Download data from the specified URL.
  *

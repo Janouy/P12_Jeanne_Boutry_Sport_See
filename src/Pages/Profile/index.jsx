@@ -9,6 +9,7 @@ import KeyDatas from "../../components/KeyDatas";
 import Score from "../../components/Score";
 import getUsers from "../../services/Users";
 import getActivitiesData from "../../services/Activities";
+import getUserAverageSessions from "../../services/AverageSessions";
 import Loader from "../../components/Loader";
 
 /**
@@ -21,20 +22,28 @@ function Profile() {
 	const [connectedUserInfos, setConnectedUserInfos] = useState();
 	const [usersActivitiesData, setUsersActivityData] = useState([]);
 	const [connectedUserActivity, setConnectedUserActivity] = useState();
+	const [usersAverageSessionsData, setUsersAverageSessionsData] = useState([]);
+	const [connectedUserAverageSessions, setConnectedUserAverageSessions] = useState();
 
 	// get users data from getUsers()
 	// get users's activities data from getActivitiesData()
+	// get users's averages sessions data from getUserAverageSessions()
 	useEffect(() => {
 		getUsers().then((data) => setUsersData(data));
 		getActivitiesData().then((data) => setUsersActivityData(data));
+		getUserAverageSessions().then((data) => setUsersAverageSessionsData(data));
 	}, []);
 
 	// find the connected user with the userId in the users data
 	// find the connected user's activity with the userId in the users data
+	// find the connected user's average sessions with the userId in the users data
 	useEffect(() => {
 		setConnectedUserInfos(usersData.find((user) => user.id === userId));
 		setConnectedUserActivity(usersActivitiesData.find((activity) => activity.userId === userId));
-	}, [usersData, usersActivitiesData]);
+		setConnectedUserAverageSessions(
+			usersAverageSessionsData.find((averageSessions) => averageSessions.userId === userId),
+		);
+	}, [usersData, usersActivitiesData, usersAverageSessionsData]);
 
 	return (
 		<div className={styles.profile}>
@@ -42,7 +51,12 @@ function Profile() {
 			<VerticalBar />
 			<div>Bonjour {!connectedUserInfos ? <Loader /> : connectedUserInfos.getFirstName()}</div>
 			{!connectedUserActivity ? <Loader /> : <Activity sessions={connectedUserActivity.getSessions()} />}
-			<AverageSessions />
+			{!connectedUserActivity ? (
+				<Loader />
+			) : (
+				<AverageSessions sessions={connectedUserAverageSessions.getSessions()} />
+			)}
+
 			<Performances />
 			{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
 			{!connectedUserInfos ? (
