@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Loader from "../Loader";
+import React from "react";
 import PropTypes from "prop-types";
 
 /**
@@ -11,23 +10,10 @@ import PropTypes from "prop-types";
  * @return { HTMLElement }
  */
 function KeyDatas({ calories, protein, carbohydrate, lipid }) {
-	const [userKeyDatas, setUserKeyDatas] = useState();
-	useEffect(() => {
-		if (calories !== undefined) {
-			setUserKeyDatas(calories);
-		}
-	}, [calories]);
-
 	return (
-		<>
-			{!userKeyDatas ? (
-				<Loader />
-			) : (
-				<div>
-					{calories}kCal/{protein}g/{carbohydrate}g/{lipid}g
-				</div>
-			)}
-		</>
+		<div>
+			{calories}kCal/{protein}g/{carbohydrate}g/{lipid}g
+		</div>
 	);
 }
 

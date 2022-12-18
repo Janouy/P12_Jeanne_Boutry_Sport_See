@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Loader from "../Loader";
 
 /**
  * Display the connected user's last score
@@ -8,14 +7,7 @@ import Loader from "../Loader";
  * @return { HTMLElement }
  */
 function Score({ lastScore }) {
-	const [score, setScore] = useState();
-	useEffect(() => {
-		if (lastScore !== undefined) {
-			setScore(lastScore);
-		}
-	}, [lastScore]);
-
-	return <div>{!score ? <Loader /> : score}</div>;
+	return <div>{lastScore}</div>;
 }
 
 Score.propTypes = {

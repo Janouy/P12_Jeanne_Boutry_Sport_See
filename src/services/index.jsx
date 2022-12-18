@@ -1,3 +1,6 @@
-import getUsers from "./Users";
+import getUsersData from "./Users";
+import getUserAverageSessions from "./AverageSessions";
+import getActivitiesData from "./Activities";
+import getPerformancesData from "./Performances";
 
-export { getUsers };
+export { getUsersData, getUserAverageSessions, getActivitiesData, getPerformancesData };

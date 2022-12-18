@@ -2,7 +2,7 @@
  * @class representing one user's activity
  */
 
-export class AverageSessions {
+export class UserAverageSessions {
 	/**
 	 * @param {number} id
 	 * @param {object} daily sessions

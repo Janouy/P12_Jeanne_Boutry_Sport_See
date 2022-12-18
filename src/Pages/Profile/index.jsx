@@ -7,9 +7,7 @@ import AverageSessions from "../../components/AverageSessions";
 import Performances from "../../components/Performances";
 import KeyDatas from "../../components/KeyDatas";
 import Score from "../../components/Score";
-import getUsers from "../../services/Users";
-import getActivitiesData from "../../services/Activities";
-import getUserAverageSessions from "../../services/AverageSessions";
+import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformancesData } from "../../services";
 import Loader from "../../components/Loader";
 
 /**
@@ -24,26 +22,32 @@ function Profile() {
 	const [connectedUserActivity, setConnectedUserActivity] = useState();
 	const [usersAverageSessionsData, setUsersAverageSessionsData] = useState([]);
 	const [connectedUserAverageSessions, setConnectedUserAverageSessions] = useState();
+	const [usersPerformancesData, setUsersPerformancesData] = useState([]);
+	const [connectedUserPerformances, setConnectedUserPerformance] = useState();
 
 	// get users data from getUsers()
 	// get users's activities data from getActivitiesData()
 	// get users's averages sessions data from getUserAverageSessions()
+	// get users's performances  from getPerformancesData()
 	useEffect(() => {
-		getUsers().then((data) => setUsersData(data));
+		getUsersData().then((data) => setUsersData(data));
 		getActivitiesData().then((data) => setUsersActivityData(data));
 		getUserAverageSessions().then((data) => setUsersAverageSessionsData(data));
+		getPerformancesData().then((data) => setUsersPerformancesData(data));
 	}, []);
 
 	// find the connected user with the userId in the users data
 	// find the connected user's activity with the userId in the users data
 	// find the connected user's average sessions with the userId in the users data
+	// find the connected user's peformances with the userId in the users data
 	useEffect(() => {
 		setConnectedUserInfos(usersData.find((user) => user.id === userId));
 		setConnectedUserActivity(usersActivitiesData.find((activity) => activity.userId === userId));
 		setConnectedUserAverageSessions(
 			usersAverageSessionsData.find((averageSessions) => averageSessions.userId === userId),
 		);
-	}, [usersData, usersActivitiesData, usersAverageSessionsData]);
+		setConnectedUserPerformance(usersPerformancesData.find((performances) => performances.userId === userId));
+	}, [usersData, usersActivitiesData, usersAverageSessionsData, usersPerformancesData]);
 
 	return (
 		<div className={styles.profile}>
@@ -56,8 +60,15 @@ function Profile() {
 			) : (
 				<AverageSessions sessions={connectedUserAverageSessions.getSessions()} />
 			)}
+			{!connectedUserPerformances ? (
+				<Loader />
+			) : (
+				<Performances
+					kind={connectedUserPerformances.getKind()}
+					performanceDatas={connectedUserPerformances.getData()}
+				/>
+			)}
 
-			<Performances />
 			{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
 			{!connectedUserInfos ? (
 				<Loader />
