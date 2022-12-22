@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import yoga from "../../assets/yoga.png";
 import strength from "../../assets/strength.png";
 import swim from "../../assets/swim.png";
-import bike from "../../assets/yoga.png";
+import bike from "../../assets/bike.png";
 
 function VerticalBar() {
 	return (

@@ -1,3 +1,7 @@
+import Calories from "../assets/calories-icon.png";
+import Protein from "../assets/protein-icon.png";
+import Carbs from "../assets/carbs-icon.png";
+import Fat from "../assets/fat-icon.png";
 /**
  * @class representing an user
  */
@@ -28,34 +32,45 @@ export class User {
 	 * @return {number} The Kilocalories value.
 	 */
 	getKiloCalories() {
-		return Number.parseFloat(this.keyData.calorieCount / 1000).toFixed(3);
+		return Number.parseFloat(this.keyData.calorieCount / 1000).toFixed(3) + "Kcal";
 	}
 	/**
 	 * Get the user's protein value.
 	 * @return {number} The protein value.
 	 */
 	getProtein() {
-		return this.keyData.proteinCount;
+		return this.keyData.proteinCount + "g";
 	}
 	/**
 	 * Get the user's carbohydrate value.
 	 * @return {number} The carbohydrate value.
 	 */
 	getCarbohydrate() {
-		return this.keyData.carbohydrateCount;
+		return this.keyData.carbohydrateCount + "g";
 	}
 	/**
 	 * Get the user's lipid value.
 	 * @return {number} The lipid value.
 	 */
 	getLipid() {
-		return this.keyData.lipidCount;
+		return this.keyData.lipidCount + "g";
+	}
+	/**
+	 * Transform user's keyDatas
+	 * @return {array} The araay of keydata value.
+	 */
+	getKeyDatas() {
+		return [
+			{ data: this.getKiloCalories(), icon: Calories, name: "Calories" },
+			{ data: this.getProtein(), icon: Protein, name: "Proteines" },
+			{ data: this.getCarbohydrate(), icon: Carbs, name: "Glucides" },
+			{ data: this.getLipid(), icon: Fat, name: "Lipides" },
+		];
 	}
 	/**
 	 * Get the last score value.
 	 * @return {number} The last score value.
 	 */
-
 	getLastScore() {
 		return this.lastScore;
 	}

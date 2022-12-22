@@ -1,0 +1,33 @@
+.KeyDataWrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.KeyDatas {
+	display: flex;
+	align-items: center;
+	width: 258px;
+	height: 124px;
+	background: #fbfbfb;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+	border-radius: 5px;
+	margin-bottom: 39px;
+}
+
+.keyDataLogo {
+	width: 60px;
+	height: 60px;
+	float: left;
+	margin-left: 28px;
+}
+.keydataData {
+	font-size: 20px;
+	font-weight: 700;
+	text-align: start;
+	margin-left: 28px;
+}
+.keydataName {
+	font-size: 14px;
+	font-weight: 500;
+}

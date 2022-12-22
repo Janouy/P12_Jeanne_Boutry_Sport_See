@@ -1,27 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./style.module.css";
 
 /**
  * Display the connected user's key datas
- * @param { number } connected user calories
- * @param { number } connected user protein
- * @param { number } connected user carbohydrate
- * @param { number } connected user lipid
+ * @param { array } connected user's keydata
  * @return { HTMLElement }
  */
-function KeyDatas({ calories, protein, carbohydrate, lipid }) {
+function KeyDatas({ KeyData }) {
 	return (
-		<div>
-			{calories}kCal/{protein}g/{carbohydrate}g/{lipid}g
+		<div className={styles.KeyDataWrapper}>
+			{KeyData.map((data, index) => (
+				<div className={styles.KeyDatas} key={index}>
+					<div>
+						<img className={styles.keyDataLogo} src={data.icon} alt="calories icon" />
+					</div>
+					<div className={styles.keydataData}>
+						{data.data}
+						<div className={styles.keydataName}>{data.name}</div>
+					</div>
+				</div>
+			))}
 		</div>
 	);
 }
 
 KeyDatas.propTypes = {
-	calories: PropTypes.string.isRequired,
-	protein: PropTypes.number.isRequired,
-	carbohydrate: PropTypes.number.isRequired,
-	lipid: PropTypes.number.isRequired,
+	KeyData: PropTypes.array.isRequired,
 };
 
 export default KeyDatas;

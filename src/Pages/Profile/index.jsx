@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
-import NavBar from "../../components/NavBar";
-import VerticalBar from "../../components/VerticalBar";
 import Activity from "../../components/Activity";
 import AverageSessions from "../../components/AverageSessions";
 import Performances from "../../components/Performances";
@@ -51,35 +49,37 @@ function Profile() {
 
 	return (
 		<div className={styles.profile}>
-			<NavBar />
-			<VerticalBar />
-			<div>Bonjour {!connectedUserInfos ? <Loader /> : connectedUserInfos.getFirstName()}</div>
-			{!connectedUserActivity ? <Loader /> : <Activity sessions={connectedUserActivity.getSessions()} />}
-			{!connectedUserActivity ? (
-				<Loader />
-			) : (
-				<AverageSessions sessions={connectedUserAverageSessions.getSessions()} />
-			)}
-			{!connectedUserPerformances ? (
-				<Loader />
-			) : (
-				<Performances
-					kind={connectedUserPerformances.getKind()}
-					performanceDatas={connectedUserPerformances.getData()}
-				/>
-			)}
+			<div className={styles.welcomeUser}>
+				<span>Bonjour</span>
+				<span className={styles.userName}>
+					{!connectedUserInfos ? <Loader /> : connectedUserInfos.getFirstName()}
+				</span>
+				<br />
+				<span className={styles.feliz}>Félicitation ! Vous avez explosé vos objectifs hier 👏 </span>
+			</div>
+			<div className={styles.profileBody}>
+				<div className={styles.graphs}>
+					{!connectedUserActivity ? <Loader /> : <Activity sessions={connectedUserActivity.getSessions()} />}
+					{!connectedUserAverageSessions ? (
+						<Loader />
+					) : (
+						<AverageSessions sessions={connectedUserAverageSessions.getSessions()} />
+					)}
+					{!connectedUserPerformances ? (
+						<Loader />
+					) : (
+						<Performances
+							kind={connectedUserPerformances.getKind()}
+							performanceDatas={connectedUserPerformances.getData()}
+						/>
+					)}
 
-			{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
-			{!connectedUserInfos ? (
-				<Loader />
-			) : (
-				<KeyDatas
-					calories={connectedUserInfos.getKiloCalories()}
-					protein={connectedUserInfos.getProtein()}
-					carbohydrate={connectedUserInfos.getCarbohydrate()}
-					lipid={connectedUserInfos.getLipid()}
-				/>
-			)}
+					{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
+				</div>
+				<div className={styles.keyData}>
+					{!connectedUserInfos ? <Loader /> : <KeyDatas KeyData={connectedUserInfos.getKeyDatas()} />}
+				</div>
+			</div>
 		</div>
 	);
 }
