@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import RenderBarChart from "../../components/RenderBarChart";
+import styles from "./style.module.css";
 
 /**
  * Display the connected user's activities
@@ -8,12 +10,8 @@ import PropTypes from "prop-types";
  */
 function Activity({ sessions }) {
 	return (
-		<div>
-			{sessions.map((session, index) => (
-				<div key={index}>
-					{session.day}/{session.kilogram}/{session.calories}
-				</div>
-			))}
+		<div className={styles.barChartWrapper}>
+			<RenderBarChart activitiesDatas={sessions} />
 		</div>
 	);
 }

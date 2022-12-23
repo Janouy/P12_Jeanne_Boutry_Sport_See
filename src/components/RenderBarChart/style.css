@@ -1,0 +1,38 @@
+.sessionLength,
+.custom-tooltip {
+	background-color: #ffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 25px;
+	width: 39px;
+	font-size: 8px;
+}
+
+.customTooltipBarChart {
+	width: 39px;
+	height: 63px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 7px;
+	background-color: #e60000;
+	color: #ffff;
+}
+.recharts-active-dot {
+	filter: drop-shadow(0.5rem 0.5rem 1rem black);
+}
+
+.label-top {
+	transform: translateY(-15px);
+	font-weight: 700;
+}
+
+.label2 {
+	transform: translateY(10px);
+}
+
+.recharts-legend-item-text {
+	color: #74798c !important;
+}

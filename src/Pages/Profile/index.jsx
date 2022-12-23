@@ -5,8 +5,8 @@ import AverageSessions from "../../components/AverageSessions";
 import Performances from "../../components/Performances";
 import KeyDatas from "../../components/KeyDatas";
 import Score from "../../components/Score";
-import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformancesData } from "../../services";
 import Loader from "../../components/Loader";
+import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformancesData } from "../../services";
 
 /**
  * Display the profile page
@@ -48,8 +48,8 @@ function Profile() {
 	}, [usersData, usersActivitiesData, usersAverageSessionsData, usersPerformancesData]);
 
 	return (
-		<div className={styles.profile}>
-			<div className={styles.welcomeUser}>
+		<div className={`${styles.profile} container`}>
+			<div className={`${styles.welcomeUser}`}>
 				<span>Bonjour</span>
 				<span className={styles.userName}>
 					{!connectedUserInfos ? <Loader /> : connectedUserInfos.getFirstName()}
@@ -57,8 +57,8 @@ function Profile() {
 				<br />
 				<span className={styles.feliz}>Félicitation ! Vous avez explosé vos objectifs hier 👏 </span>
 			</div>
-			<div className={styles.profileBody}>
-				<div className={styles.graphs}>
+			<div className={`${styles.profileBody} row`}>
+				<div className={`${styles.graphs} col-9`}>
 					{!connectedUserActivity ? <Loader /> : <Activity sessions={connectedUserActivity.getSessions()} />}
 					{!connectedUserAverageSessions ? (
 						<Loader />
@@ -76,7 +76,7 @@ function Profile() {
 
 					{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
 				</div>
-				<div className={styles.keyData}>
+				<div className={`${styles.keyData} col-3`}>
 					{!connectedUserInfos ? <Loader /> : <KeyDatas KeyData={connectedUserInfos.getKeyDatas()} />}
 				</div>
 			</div>

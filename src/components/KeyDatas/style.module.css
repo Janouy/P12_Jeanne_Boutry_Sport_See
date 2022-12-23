@@ -31,3 +31,29 @@
 	font-size: 14px;
 	font-weight: 500;
 }
+
+@media screen and (max-width: 1439px) {
+	.KeyDatas {
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 90px;
+		border-radius: 5px;
+		margin-bottom: 39px;
+	}
+
+	.keyDataLogo {
+		width: 50px;
+		height: 50px;
+	}
+	.keydataData {
+		font-size: 14px;
+		font-weight: 700;
+		margin-left: 20px;
+	}
+	.keydataName {
+		font-size: 12px;
+		font-weight: 500;
+		color: #74798c;
+	}
+}

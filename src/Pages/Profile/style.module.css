@@ -1,21 +1,17 @@
 .profile {
 	padding-top: 159px;
 	font-size: 24px;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
 	z-index: -5;
+	padding-left: 91px;
 }
 .profileBody {
-	margin-top: 159px;
-	margin-left: 224px;
+	margin-top: 200px;
 	display: flex;
 	justify-content: space-between;
 }
 .welcomeUser {
 	font-size: 48px;
 	position: absolute;
-	left: 224px;
 	text-align: left;
 }
 .userName {
@@ -25,10 +21,27 @@
 .feliz {
 	font-size: 18px;
 }
-.graphs {
-	border: 2px solid red;
-}
 
 .keyData {
-	padding-right: 10%;
+	width: 258px;
+}
+
+@media screen and (max-width: 1439px) {
+	.profile {
+		padding-top: 120px;
+		font-size: 18px;
+		left: 50px;
+	}
+	.profileBody {
+		margin-top: 120px;
+	}
+	.welcomeUser {
+		font-size: 38px;
+	}
+	.feliz {
+		font-size: 14px;
+	}
+	.keyData {
+		width: 200px;
+	}
 }
