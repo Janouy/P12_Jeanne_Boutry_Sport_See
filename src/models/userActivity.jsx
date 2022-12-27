@@ -16,7 +16,7 @@ export class UserActivity {
 	 * Get sessions values.
 	 * @return {array} sessions values
 	 */
-	getSessions() {
+	getActivitySessions() {
 		//sort sessions by chronological order
 		let sortedSessions = this.sessions.sort(function (a, b) {
 			return new Date(a.day) - new Date(b.day);

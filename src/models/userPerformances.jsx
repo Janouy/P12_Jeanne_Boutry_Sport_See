@@ -15,18 +15,14 @@ export class UserPerformances {
 	}
 
 	/**
-	 * Get kind values.
-	 * @return {object} kind values
-	 */
-	getKind() {
-		return this.kind;
-	}
-
-	/**
 	 * Get data values.
 	 * @return {array} data values
 	 */
-	getData() {
+	getPerformancesDatas() {
+		//order datas by kind
+		this.data.sort((a, b) => a.kind - b.kind);
+		//replace the number by the name of the kind
+		this.data.forEach((data, index) => (data["kind"] = this.kind[index + 1]));
 		return this.data;
 	}
 }

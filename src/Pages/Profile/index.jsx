@@ -59,20 +59,21 @@ function Profile() {
 			</div>
 			<div className={`${styles.profile} row`}>
 				<div className={`${styles.graphs} col-9 d-flex flex-column justify-content-between`}>
-					{!connectedUserActivity ? <Loader /> : <Activity sessions={connectedUserActivity.getSessions()} />}
+					{!connectedUserActivity ? (
+						<Loader />
+					) : (
+						<Activity sessions={connectedUserActivity.getActivitySessions()} />
+					)}
 					<div className="d-flex justify-content-between mt-5">
 						{!connectedUserAverageSessions ? (
 							<Loader />
 						) : (
-							<AverageSessions sessions={connectedUserAverageSessions.getSessions()} />
+							<AverageSessions sessions={connectedUserAverageSessions.getAverageSessions()} />
 						)}
 						{!connectedUserPerformances ? (
 							<Loader />
 						) : (
-							<Performances
-								kind={connectedUserPerformances.getKind()}
-								performanceDatas={connectedUserPerformances.getData()}
-							/>
+							<Performances performanceDatas={connectedUserPerformances.getPerformancesDatas()} />
 						)}
 						{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
 					</div>

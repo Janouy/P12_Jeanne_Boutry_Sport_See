@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import RenderRadarChart from "../RenderRadarChart";
+import styles from "./style.module.css";
 
 /**
  * Display the connected user's performances
@@ -7,11 +9,14 @@ import PropTypes from "prop-types";
  * @return { HTMLElement }
  */
 
-function Performances({ kind, performanceDatas }) {
-	return <div className="col border mx-4">Performances</div>;
+function Performances({ performanceDatas }) {
+	return (
+		<div className={`${styles.radarChart}`}>
+			<RenderRadarChart performanceDatas={performanceDatas} />
+		</div>
+	);
 }
 Performances.propTypes = {
-	kind: PropTypes.object.isRequired,
 	performanceDatas: PropTypes.array.isRequired,
 };
 export default Performances;

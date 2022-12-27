@@ -16,7 +16,7 @@ export class UserAverageSessions {
 	 * Get sessions values.
 	 * @return {array} sessions values
 	 */
-	getSessions() {
+	getAverageSessions() {
 		const sessionsAddDays = [];
 		const weekDays = ["L", "M", "M", "J", "V", "S", "D"];
 		for (let i = 0; i < this.sessions.length; i++) {

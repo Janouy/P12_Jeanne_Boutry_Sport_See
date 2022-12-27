@@ -1,0 +1,13 @@
+.radarChart {
+	width: 258px;
+	height: 263px;
+	background-color: #282c34;
+	border-radius: 5px;
+}
+
+@media screen and (max-width: 1439px) {
+	.radarChart {
+		width: 205px;
+		height: 200px;
+	}
+}
