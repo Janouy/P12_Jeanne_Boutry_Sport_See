@@ -1,0 +1,42 @@
+.lineChart {
+	width: 258px;
+	height: 263px;
+	border-radius: 5px;
+}
+.rightColor {
+	background-color: #e60000;
+	width: 258px;
+	height: 263px;
+	position: absolute;
+	border-radius: 5px;
+}
+.leftColor {
+	background-color: #ff0000;
+	width: 180px;
+	height: 230px;
+	position: absolute;
+	border-radius: 5px 0px 0px 5px;
+	font-size: 15px;
+	line-height: 24px;
+	color: rgba(255, 255, 255, 0.5);
+	padding-top: 25px;
+	text-align: left;
+	padding-left: 25px;
+}
+
+@media screen and (max-width: 1439px) {
+	.lineChart {
+		width: 200px;
+		height: 200px;
+	}
+	.rightColor {
+		width: 200px;
+		height: 200px;
+		position: absolute;
+	}
+	.leftColor {
+		width: 140px;
+		height: 200px;
+		font-size: 12px;
+	}
+}

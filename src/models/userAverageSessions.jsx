@@ -17,6 +17,14 @@ export class UserAverageSessions {
 	 * @return {array} sessions values
 	 */
 	getSessions() {
-		return this.sessions;
+		const sessionsAddDays = [];
+		const weekDays = ["L", "M", "M", "J", "V", "S", "D"];
+		for (let i = 0; i < this.sessions.length; i++) {
+			sessionsAddDays.push({
+				day: weekDays[i],
+				sessionLength: this.sessions[i].sessionLength,
+			});
+		}
+		return sessionsAddDays;
 	}
 }

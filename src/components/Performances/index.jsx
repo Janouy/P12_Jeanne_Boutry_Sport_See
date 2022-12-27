@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
  */
 
 function Performances({ kind, performanceDatas }) {
-	return <div>Performances</div>;
+	return <div className="col border mx-4">Performances</div>;
 }
 Performances.propTypes = {
 	kind: PropTypes.object.isRequired,

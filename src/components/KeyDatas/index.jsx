@@ -9,9 +9,9 @@ import styles from "./style.module.css";
  */
 function KeyDatas({ KeyData }) {
 	return (
-		<div className={styles.KeyDataWrapper}>
+		<div className={`${styles.KeyDataWrapper} d-flex flex-column justify-content-between`}>
 			{KeyData.map((data, index) => (
-				<div className={styles.KeyDatas} key={index}>
+				<div className={`${styles.KeyDatas} d-flex align-items-center`} key={index}>
 					<div>
 						<img className={styles.keyDataLogo} src={data.icon} alt="calories icon" />
 					</div>

@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
  * @return { HTMLElement }
  */
 function Score({ lastScore }) {
-	return <div>{lastScore}</div>;
+	return <div className="col border">{lastScore}</div>;
 }
 
 Score.propTypes = {

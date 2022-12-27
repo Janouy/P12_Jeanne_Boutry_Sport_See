@@ -27,14 +27,8 @@ export class UserActivity {
 			sortedSessions = sortedSessions.slice(sortedSessions.length - 10);
 		}
 		//replacing chronological date by nummbers 1 to 10
-		const replaceDatesSessions = [];
-		for (let i = 0; i < sortedSessions.length; i++) {
-			replaceDatesSessions.push({
-				day: i + 1,
-				kilogram: sortedSessions[i].kilogram,
-				calories: sortedSessions[i].calories,
-			});
-		}
-		return replaceDatesSessions;
+		sortedSessions.forEach((session, index) => (session["day"] = index + 1));
+
+		return sortedSessions;
 	}
 }

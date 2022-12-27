@@ -48,7 +48,7 @@ function Profile() {
 	}, [usersData, usersActivitiesData, usersAverageSessionsData, usersPerformancesData]);
 
 	return (
-		<div className={`${styles.profile} container`}>
+		<div className={`${styles.profileWrapper} container`}>
 			<div className={`${styles.welcomeUser}`}>
 				<span>Bonjour</span>
 				<span className={styles.userName}>
@@ -57,26 +57,27 @@ function Profile() {
 				<br />
 				<span className={styles.feliz}>Félicitation ! Vous avez explosé vos objectifs hier 👏 </span>
 			</div>
-			<div className={`${styles.profileBody} row`}>
-				<div className={`${styles.graphs} col-9`}>
+			<div className={`${styles.profile} row`}>
+				<div className={`${styles.graphs} col-9 d-flex flex-column justify-content-between`}>
 					{!connectedUserActivity ? <Loader /> : <Activity sessions={connectedUserActivity.getSessions()} />}
-					{!connectedUserAverageSessions ? (
-						<Loader />
-					) : (
-						<AverageSessions sessions={connectedUserAverageSessions.getSessions()} />
-					)}
-					{!connectedUserPerformances ? (
-						<Loader />
-					) : (
-						<Performances
-							kind={connectedUserPerformances.getKind()}
-							performanceDatas={connectedUserPerformances.getData()}
-						/>
-					)}
-
-					{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
+					<div className="d-flex justify-content-between mt-5">
+						{!connectedUserAverageSessions ? (
+							<Loader />
+						) : (
+							<AverageSessions sessions={connectedUserAverageSessions.getSessions()} />
+						)}
+						{!connectedUserPerformances ? (
+							<Loader />
+						) : (
+							<Performances
+								kind={connectedUserPerformances.getKind()}
+								performanceDatas={connectedUserPerformances.getData()}
+							/>
+						)}
+						{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
+					</div>
 				</div>
-				<div className={`${styles.keyData} col-3`}>
+				<div className={`${styles.keyDataWrapper} col-3`}>
 					{!connectedUserInfos ? <Loader /> : <KeyDatas KeyData={connectedUserInfos.getKeyDatas()} />}
 				</div>
 			</div>

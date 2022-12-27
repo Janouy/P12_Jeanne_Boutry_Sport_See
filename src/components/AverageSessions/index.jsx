@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./style.module.css";
+import RenderLineChart from "../../components/RenderLineChart";
 
 /**
  * Display the connected user's average sessions
@@ -9,13 +11,17 @@ import PropTypes from "prop-types";
 
 function AverageSessions({ sessions }) {
 	return (
-		<div>
-			{sessions.map((session, index) => (
-				<div key={index}>
-					{session.day}/{session.sessionLength}
-				</div>
-			))}
-		</div>
+		<>
+			<div className={styles.rightColor}></div>
+			<div className={styles.leftColor}>
+				Durée moyenne des
+				<br />
+				sessions
+			</div>
+			<div className={`${styles.lineChart}`}>
+				<RenderLineChart sessions={sessions} />
+			</div>
+		</>
 	);
 }
 AverageSessions.propTypes = {

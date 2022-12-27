@@ -29,7 +29,7 @@ function RenderBarChart({ activitiesDatas }) {
 	function CustomTooltip({ payload, active }) {
 		if (active) {
 			return (
-				<div className="customTooltipBarChart">
+				<div className="customTooltipBarChart pt-3">
 					<p>{`${payload[1].value} Kg`}</p>
 					<p>{`${payload[0].value} Kcal`}</p>
 				</div>
