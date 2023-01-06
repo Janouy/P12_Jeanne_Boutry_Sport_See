@@ -1,3 +1,9 @@
+.barChartWrapper {
+	width: 100%;
+	text-align: left;
+	background-color: #fbfbfb;
+	border-radius: 5px;
+}
 .sessionLength,
 .custom-tooltip {
 	background-color: #ffff;

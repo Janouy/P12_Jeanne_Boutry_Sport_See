@@ -4,8 +4,8 @@
 
 export class UserAverageSessions {
 	/**
-	 * @param {number} id
-	 * @param {object} daily sessions
+	 * @param {number} user's id
+	 * @param {array} user's daily sessions
 	 */
 	constructor(userId, sessions) {
 		this.userId = userId;
@@ -14,9 +14,9 @@ export class UserAverageSessions {
 
 	/**
 	 * Get sessions values.
-	 * @return {array} sessions values
+	 * @return {array} user's daily sessions values
 	 */
-	getAverageSessions() {
+	getFormatedAverageSessions() {
 		const sessionsAddDays = [];
 		const weekDays = ["L", "M", "M", "J", "V", "S", "D"];
 		for (let i = 0; i < this.sessions.length; i++) {

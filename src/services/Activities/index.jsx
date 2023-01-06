@@ -1,4 +1,4 @@
-import { UserActivity } from "../../models/userActivity";
+import { UserActivities } from "../../models/userActivities";
 const { REACT_APP_ACTIVITY_MOCK } = process.env;
 
 /**
@@ -13,7 +13,7 @@ async function getActivitiesData() {
 	const response = await fetch(REACT_APP_ACTIVITY_MOCK);
 	const json = await response.json();
 	const activityData = json.data.map((activity) => {
-		return new UserActivity(activity.userId, activity.sessions);
+		return new UserActivities(activity.userId, activity.sessions);
 	});
 	return activityData;
 }

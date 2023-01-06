@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./style.module.css";
-import Activity from "../../components/Activity";
-import AverageSessions from "../../components/AverageSessions";
-import Performances from "../../components/Performances";
-import KeyDatas from "../../components/KeyDatas";
-import Score from "../../components/Score";
+import ActivitiesRenderBarChart from "../../components/ActivitiesRenderBarChart";
+import AverageSessionsRenderLineChart from "../../components/AverageSessionsRenderLineChart";
+import PerformancesRenderRadarChart from "../../components/PerformancesRenderRadarChart";
+import NutritionalsInformations from "../../components/NutritionalsInformations";
+import ScoreRenderPieChart from "../../components/ScoreRenderPieChart";
 import Loader from "../../components/Loader";
 import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformancesData } from "../../services";
 
@@ -16,28 +16,20 @@ function Profile() {
 	const userId = 12;
 	const [usersData, setUsersData] = useState([]);
 	const [connectedUserInfos, setConnectedUserInfos] = useState();
-	const [usersActivitiesData, setUsersActivityData] = useState([]);
+	const [usersActivitiesData, setUsersActivitiesData] = useState([]);
 	const [connectedUserActivity, setConnectedUserActivity] = useState();
 	const [usersAverageSessionsData, setUsersAverageSessionsData] = useState([]);
 	const [connectedUserAverageSessions, setConnectedUserAverageSessions] = useState();
 	const [usersPerformancesData, setUsersPerformancesData] = useState([]);
 	const [connectedUserPerformances, setConnectedUserPerformance] = useState();
 
-	// get users data from getUsers()
-	// get users's activities data from getActivitiesData()
-	// get users's averages sessions data from getUserAverageSessions()
-	// get users's performances  from getPerformancesData()
 	useEffect(() => {
 		getUsersData().then((data) => setUsersData(data));
-		getActivitiesData().then((data) => setUsersActivityData(data));
+		getActivitiesData().then((data) => setUsersActivitiesData(data));
 		getUserAverageSessions().then((data) => setUsersAverageSessionsData(data));
 		getPerformancesData().then((data) => setUsersPerformancesData(data));
 	}, []);
 
-	// find the connected user with the userId in the users data
-	// find the connected user's activity with the userId in the users data
-	// find the connected user's average sessions with the userId in the users data
-	// find the connected user's peformances with the userId in the users data
 	useEffect(() => {
 		setConnectedUserInfos(usersData.find((user) => user.id === userId));
 		setConnectedUserActivity(usersActivitiesData.find((activity) => activity.userId === userId));
@@ -62,24 +54,38 @@ function Profile() {
 					{!connectedUserActivity ? (
 						<Loader />
 					) : (
-						<Activity sessions={connectedUserActivity.getActivitySessions()} />
+						<ActivitiesRenderBarChart
+							activitiesDatas={connectedUserActivity.getFormatedActivitySessions()}
+						/>
 					)}
 					<div className="d-flex justify-content-between mt-5">
 						{!connectedUserAverageSessions ? (
 							<Loader />
 						) : (
-							<AverageSessions sessions={connectedUserAverageSessions.getAverageSessions()} />
+							<AverageSessionsRenderLineChart
+								sessions={connectedUserAverageSessions.getFormatedAverageSessions()}
+							/>
 						)}
 						{!connectedUserPerformances ? (
 							<Loader />
 						) : (
-							<Performances performanceDatas={connectedUserPerformances.getPerformancesDatas()} />
+							<PerformancesRenderRadarChart
+								performanceDatas={connectedUserPerformances.getFormatedPerformancesDatas()}
+							/>
 						)}
-						{!connectedUserInfos ? <Loader /> : <Score lastScore={connectedUserInfos.getLastScore()} />}
+						{!connectedUserInfos ? (
+							<Loader />
+						) : (
+							<ScoreRenderPieChart lastScore={connectedUserInfos.getLastScoreInPercent()} />
+						)}
 					</div>
 				</div>
 				<div className={`${styles.keyDataWrapper} col-3`}>
-					{!connectedUserInfos ? <Loader /> : <KeyDatas KeyData={connectedUserInfos.getKeyDatas()} />}
+					{!connectedUserInfos ? (
+						<Loader />
+					) : (
+						<NutritionalsInformations KeyData={connectedUserInfos.getKeyDatas()} />
+					)}
 				</div>
 			</div>
 		</div>

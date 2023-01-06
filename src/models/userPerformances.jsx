@@ -4,9 +4,9 @@
 
 export class UserPerformances {
 	/**
-	 * @param {number} id
-	 * @param {object} kind
-	 * @param {array} data
+	 * @param {number} user's id
+	 * @param {object} kind of perfomances
+	 * @param {array} user's performances value
 	 */
 	constructor(userId, kind, data) {
 		this.userId = userId;
@@ -16,12 +16,12 @@ export class UserPerformances {
 
 	/**
 	 * Get data values.
-	 * @return {array} data values
+	 * @return {array} user's performances values
 	 */
-	getPerformancesDatas() {
+	getFormatedPerformancesDatas() {
 		//order datas by kind
 		this.data.sort((a, b) => a.kind - b.kind);
-		//replace the number by the name of the kind
+		//replace the number by the name of the corresponding kind of performance
 		this.data.forEach((data, index) => (data["kind"] = this.kind[index + 1]));
 		return this.data;
 	}

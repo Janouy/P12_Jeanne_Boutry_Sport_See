@@ -7,7 +7,7 @@ import styles from "./style.module.css";
  * @param { array } connected user's keydata
  * @return { HTMLElement }
  */
-function KeyDatas({ KeyData }) {
+function NutritionalsInformations({ KeyData }) {
 	return (
 		<div className={`${styles.KeyDataWrapper} d-flex flex-column justify-content-between`}>
 			{KeyData.map((data, index) => (
@@ -25,8 +25,8 @@ function KeyDatas({ KeyData }) {
 	);
 }
 
-KeyDatas.propTypes = {
+NutritionalsInformations.propTypes = {
 	KeyData: PropTypes.array.isRequired,
 };
 
-export default KeyDatas;
+export default NutritionalsInformations;

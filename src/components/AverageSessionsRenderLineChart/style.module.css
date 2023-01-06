@@ -1,3 +1,14 @@
+.sessionLength,
+.customTooltip {
+	background-color: #ffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 5px;
+	height: 15px;
+	width: 39px;
+	font-size: 8px;
+}
 .lineChart {
 	width: 258px;
 	height: 263px;
