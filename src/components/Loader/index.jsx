@@ -3,8 +3,8 @@ import Loading from "../../assets/loading.gif";
 import styles from "./style.module.css";
 function Loader() {
 	return (
-		<div className={styles.loader}>
-			<img src={Loading} alt="loader" />
+		<div className={styles.loaderWrapper}>
+			<img className={styles.loader} src={Loading} alt="loader" />
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 import { UserInformations } from "../../models/userInformations";
 const { REACT_APP_USERS_MOCK } = process.env;
-const { REACT_APP_CONNECTED_USER } = process.env;
+const { REACT_APP_USERS_API } = process.env;
 
 /**
  * Download data from the specified URL.
@@ -12,17 +12,19 @@ const { REACT_APP_CONNECTED_USER } = process.env;
 
 async function getUsersData() {
 	try {
-		const response = await fetch(`${REACT_APP_USERS_MOCK}/${REACT_APP_CONNECTED_USER}`);
+		const response = await fetch(REACT_APP_USERS_MOCK);
+		//const response = await fetch(REACT_APP_USERS_API);
 		const userData = await response.json();
 		const userInfos = new UserInformations(
-			userData.id,
-			userData.userInfos,
-			userData.todayScore || userData.score,
-			userData.keyData,
+			userData.data.id,
+			userData.data.userInfos,
+			userData.data.todayScore || userData.score,
+			userData.data.keyData,
 		);
 		return userInfos;
 	} catch (err) {
-		return (error) => console.error("error:" + error);
+		console.error("error:" + err);
+		throw err;
 	}
 }
 

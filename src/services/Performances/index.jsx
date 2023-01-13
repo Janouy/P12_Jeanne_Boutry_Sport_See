@@ -1,6 +1,7 @@
 import { UserPerformances } from "../../models/userPerformances";
 const { REACT_APP_PERFORMANCES_MOCK } = process.env;
-const { REACT_APP_CONNECTED_USER } = process.env;
+const { REACT_APP_PERFORMANCES_API } = process.env;
+
 /**
  * Download data from the specified URL.
  *
@@ -11,10 +12,14 @@ const { REACT_APP_CONNECTED_USER } = process.env;
 
 async function getPerformancesData() {
 	try {
-		const response = await fetch(`${REACT_APP_PERFORMANCES_MOCK}/${REACT_APP_CONNECTED_USER}`);
+		const response = await fetch(REACT_APP_PERFORMANCES_MOCK);
+		//const response = await fetch(REACT_APP_PERFORMANCES_API);
 		const performancesData = await response.json();
-		const userPerformance = new UserPerformances(performancesData.id, performancesData.kind, performancesData.data);
-
+		const userPerformance = new UserPerformances(
+			performancesData.data.id,
+			performancesData.data.kind,
+			performancesData.data.data,
+		);
 		return userPerformance;
 	} catch (err) {
 		return (error) => console.error("error:" + error);

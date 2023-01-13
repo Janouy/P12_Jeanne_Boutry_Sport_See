@@ -1,5 +1,9 @@
-.loader {
+.loaderWrapper {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.loader {
+	width: 100px;
 }
