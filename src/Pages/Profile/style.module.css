@@ -26,6 +26,7 @@
 
 @media screen and (max-width: 1439px) {
 	.profileWrapper {
+		padding-top: 119px;
 		font-size: 18px;
 		padding-left: 120px;
 	}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import styles from "./style.module.css";
 import ActivitiesRenderBarChart from "../../components/ActivitiesRenderBarChart";
 import AverageSessionsRenderLineChart from "../../components/AverageSessionsRenderLineChart";
@@ -13,78 +13,77 @@ import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformance
  * @return { HTMLElement } With React components
  */
 function Profile() {
-	const userId = 12;
 	const [usersData, setUsersData] = useState([]);
-	const [connectedUserInfos, setConnectedUserInfos] = useState();
-	const [usersActivitiesData, setUsersActivitiesData] = useState([]);
-	const [connectedUserActivity, setConnectedUserActivity] = useState();
+	const [userActivityData, setUserActivityData] = useState([]);
 	const [usersAverageSessionsData, setUsersAverageSessionsData] = useState([]);
-	const [connectedUserAverageSessions, setConnectedUserAverageSessions] = useState();
 	const [usersPerformancesData, setUsersPerformancesData] = useState([]);
-	const [connectedUserPerformances, setConnectedUserPerformance] = useState();
+	const getScreenSize = useCallback(() => {
+		return window.innerWidth;
+	}, []);
+	const [windowSize, setWindowSize] = useState(getScreenSize);
+
+	useEffect(() => {
+		function handleResize() {
+			setWindowSize(getScreenSize());
+		}
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, [windowSize, getScreenSize]);
 
 	useEffect(() => {
 		getUsersData().then((data) => setUsersData(data));
-		getActivitiesData().then((data) => setUsersActivitiesData(data));
+		getActivitiesData().then((data) => setUserActivityData(data));
 		getUserAverageSessions().then((data) => setUsersAverageSessionsData(data));
 		getPerformancesData().then((data) => setUsersPerformancesData(data));
 	}, []);
-
-	useEffect(() => {
-		setConnectedUserInfos(usersData.find((user) => user.id === userId));
-		setConnectedUserActivity(usersActivitiesData.find((activity) => activity.userId === userId));
-		setConnectedUserAverageSessions(
-			usersAverageSessionsData.find((averageSessions) => averageSessions.userId === userId),
-		);
-		setConnectedUserPerformance(usersPerformancesData.find((performances) => performances.userId === userId));
-	}, [usersData, usersActivitiesData, usersAverageSessionsData, usersPerformancesData]);
 
 	return (
 		<div className={`${styles.profileWrapper} container`}>
 			<div className={`${styles.welcomeUser}`}>
 				<span>Bonjour</span>
 				<span className={styles.userName}>
-					{!connectedUserInfos ? <Loader /> : connectedUserInfos.getFirstName()}
+					{usersData.length === 0 ? <Loader /> : usersData.getFirstName()}
 				</span>
 				<br />
 				<span className={styles.feliz}>Félicitation ! Vous avez explosé vos objectifs hier 👏 </span>
 			</div>
 			<div className={`${styles.profile} row`}>
 				<div className={`${styles.graphs} col-9 d-flex flex-column justify-content-between`}>
-					{!connectedUserActivity ? (
+					{userActivityData.length === 0 ? (
 						<Loader />
 					) : (
-						<ActivitiesRenderBarChart
-							activitiesDatas={connectedUserActivity.getFormatedActivitySessions()}
-						/>
+						<ActivitiesRenderBarChart activitiesDatas={userActivityData.getFormatedActivitySessions()} />
 					)}
-					<div className="d-flex justify-content-between mt-5">
-						{!connectedUserAverageSessions ? (
+					<div className="d-flex justify-content-between mt-2 mt-xl-5">
+						{usersAverageSessionsData.length === 0 ? (
 							<Loader />
 						) : (
 							<AverageSessionsRenderLineChart
-								sessions={connectedUserAverageSessions.getFormatedAverageSessions()}
+								sessions={usersAverageSessionsData.getFormatedAverageSessions()}
 							/>
 						)}
-						{!connectedUserPerformances ? (
+						{usersPerformancesData.length === 0 ? (
 							<Loader />
 						) : (
 							<PerformancesRenderRadarChart
-								performanceDatas={connectedUserPerformances.getFormatedPerformancesDatas()}
+								performanceDatas={usersPerformancesData.getFormatedPerformancesDatas()}
 							/>
 						)}
-						{!connectedUserInfos ? (
+						{usersData.length === 0 ? (
 							<Loader />
 						) : (
-							<ScoreRenderPieChart lastScore={connectedUserInfos.getLastScoreInPercent()} />
+							<ScoreRenderPieChart
+								lastScore={usersData.getDailyScoreInPercent()}
+								windowSize={windowSize}
+							/>
 						)}
 					</div>
 				</div>
 				<div className={`${styles.keyDataWrapper} col-3`}>
-					{!connectedUserInfos ? (
+					{usersData.length === 0 ? (
 						<Loader />
 					) : (
-						<NutritionalsInformations KeyData={connectedUserInfos.getKeyDatas()} />
+						<NutritionalsInformations KeyData={usersData.getKeyDatas()} />
 					)}
 				</div>
 			</div>

@@ -6,7 +6,7 @@ import Fat from "../assets/fat-icon.png";
  * @class representing an user
  */
 
-export class User {
+export class UserInformations {
 	/**
 	 * @param {number} user's id
 	 * @param {object} user's informations
@@ -22,7 +22,7 @@ export class User {
 
 	/**
 	 * Get the firstname value.
-	 * @return {string} The firstname value.
+	 * @return {string} user's firstname value.
 	 */
 	getFirstName() {
 		return this.userInfos.firstName;
@@ -37,7 +37,7 @@ export class User {
 
 	/**
 	 * Transform user's keyDatas
-	 * @return {array} The araay of keydata value.
+	 * @return {array} The aray of keydata value.
 	 */
 	getKeyDatas() {
 		return [
@@ -49,12 +49,12 @@ export class User {
 	}
 	/**
 	 * Get the last score value.
-	 * @return {number} The last score value.
+	 * @return {array} user's lastScore percent and user's purpose percent
 	 */
-	getLastScoreInPercent() {
+	getDailyScoreInPercent() {
 		return [
 			{ name: "score", value: this.lastScore * 100 },
-			{ name: "purpose", value: 76 },
+			{ name: "purpose", value: 100 - this.lastScore * 100 },
 		];
 	}
 }

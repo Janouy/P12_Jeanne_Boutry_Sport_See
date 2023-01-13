@@ -1,4 +1,4 @@
-import getUsersData from "./Users";
+import getUsersData from "./UserInfos";
 import getUserAverageSessions from "./AverageSessions";
 import getActivitiesData from "./Activities";
 import getPerformancesData from "./Performances";

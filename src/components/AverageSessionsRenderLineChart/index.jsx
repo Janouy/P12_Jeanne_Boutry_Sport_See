@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import { LineChart, Line, CartesianGrid, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import styles from "./style.module.css";
 
+/**
+ * Component to show a linechart graph representing user's sport average sessions's duration
+ * @component
+ * @type {React.FC<InferProps<import("./propTypes").AverageSessionsRenderLineChart.propTypes>>}
+ * @returns {React.ReactElement} The graph
+ */
 function AverageSessionsRenderLineChart({ sessions }) {
 	function CustomTooltip({ payload, active }) {
 		if (active) {

@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, PolarRadiusAxis, Text } from "recharts";
 import styles from "./style.module.css";
 
+/**
+ * Component to show a radarchart graph representing user's performances
+ * @component
+ * @type {React.FC<InferProps<import("./propTypes").PerformancesRenderRadarChart.propTypes>>}
+ * @returns {React.ReactElement} The graph
+ */
 function PerformancesRenderRadarChart({ performanceDatas }) {
 	function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
 		return (

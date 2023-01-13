@@ -1,21 +1,15 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "./style.css";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
+/**
+ * Component to show a barChart graph representing user's sport acitivties
+ * @component
+ * @type {React.FC<InferProps<import("./propTypes").ActivitiesRenderBarChart.propTypes>>}
+ * @returns {React.ReactElement} The graph
+ */
 function ActivitiesRenderBarChart({ activitiesDatas }) {
-	const getScreenSize = useCallback(() => {
-		return window.innerWidth;
-	}, []);
-	const [windowSize, setWindowSize] = useState(getScreenSize);
-	useEffect(() => {
-		function handleResize() {
-			setWindowSize(getScreenSize());
-		}
-		window.addEventListener("resize", handleResize);
-		return () => window.removeEventListener("resize", handleResize);
-	}, [windowSize, getScreenSize]);
-
 	const legendText = ["Poids (Kg)", "Calories brûlées (kCal)"];
 	const colors = ["#000", "#e60000"];
 	const roundNumber = 10;
@@ -92,4 +86,5 @@ function ActivitiesRenderBarChart({ activitiesDatas }) {
 ActivitiesRenderBarChart.propTypes = {
 	activitiesDatas: PropTypes.array.isRequired,
 };
+
 export default ActivitiesRenderBarChart;

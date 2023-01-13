@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import styles from "./style.module.css";
 
 /**
- * Display the connected user's key datas
- * @param { array } connected user's keydata
+ * Display the connected user's nutritional informations
+ * @param { array } connected user's nutritionals informations
  * @return { HTMLElement }
  */
 function NutritionalsInformations({ KeyData }) {

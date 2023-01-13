@@ -3,19 +3,24 @@ import PropTypes from "prop-types";
 import { PieChart, Pie, Cell, Label } from "recharts";
 import styles from "./style.module.css";
 
-function ScoreRenderPieChart({ lastScore }) {
+/**
+ * Component to show a piechart graph representing user's daily percent score
+ * @component
+ * @type {React.FC<InferProps<import("./propTypes").ScoreRenderPieChart.propTypes>>}
+ * @returns {React.ReactElement} The graph
+ */
+function ScoreRenderPieChart({ lastScore, windowSize }) {
 	const innerPie = [{ name: "innerPie", value: 100 }];
 	const COLORS = ["#e60000", "#FBFBFB"];
 
 	return (
 		<div className={styles.pieChart}>
-			<PieChart width={400} height={400}>
+			<PieChart width={windowSize >= 1440 ? 260 : 200} height={windowSize >= 1440 ? 260 : 200}>
 				<Pie
 					data={lastScore}
-					cx="32%"
-					cy="32%"
-					//startAngle={180}
-					// endAngle={0}
+					cx="50%"
+					cy="50%"
+					startAngle={90}
 					innerRadius={88}
 					outerRadius={100}
 					dataKey="value"
@@ -30,8 +35,8 @@ function ScoreRenderPieChart({ lastScore }) {
 					data={innerPie}
 					dataKey="value"
 					nameKey="name"
-					cx="32%"
-					cy="32%"
+					cx="50%"
+					cy="50%"
 					outerRadius={88}
 					fill="#FFFF"
 					stroke={"#FFFF"}

@@ -1,5 +1,6 @@
 import { UserActivities } from "../../models/userActivities";
 const { REACT_APP_ACTIVITY_MOCK } = process.env;
+const { REACT_APP_CONNECTED_USER } = process.env;
 
 /**
  * Download data from the specified URL.
@@ -10,12 +11,16 @@ const { REACT_APP_ACTIVITY_MOCK } = process.env;
  */
 
 async function getActivitiesData() {
-	const response = await fetch(REACT_APP_ACTIVITY_MOCK);
-	const json = await response.json();
-	const activityData = json.data.map((activity) => {
-		return new UserActivities(activity.userId, activity.sessions);
-	});
-	return activityData;
+	try {
+		const response = await fetch(`${REACT_APP_ACTIVITY_MOCK}/${REACT_APP_CONNECTED_USER}`);
+		const activityData = await response.json();
+
+		const userActivity = new UserActivities(activityData.id, activityData.sessions);
+
+		return userActivity;
+	} catch (err) {
+		return (error) => console.error("error:" + error);
+	}
 }
 
 export default getActivitiesData;
