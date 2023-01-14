@@ -1,7 +1,6 @@
 import { UserInformations } from "../../models/userInformations";
-const { REACT_APP_USERS_MOCK } = process.env;
-const { REACT_APP_USERS_API } = process.env;
-
+const { REACT_APP_API_URL } = process.env;
+const user = 12;
 /**
  * Download data from the specified URL.
  *
@@ -12,8 +11,7 @@ const { REACT_APP_USERS_API } = process.env;
 
 async function getUsersData() {
 	try {
-		const response = await fetch(REACT_APP_USERS_MOCK);
-		//const response = await fetch(REACT_APP_USERS_API);
+		const response = await fetch(`${REACT_APP_API_URL}/user/${user}`);
 		const userData = await response.json();
 		const userInfos = new UserInformations(
 			userData.data.id,

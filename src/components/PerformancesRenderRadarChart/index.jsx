@@ -4,10 +4,13 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Pola
 import styles from "./style.module.css";
 
 /**
+ * A number, or a string containing a number.
+ * @typedef {array} Performances
+ */
+/**
  * Component to show a radarchart graph representing user's performances
- * @component
- * @type {React.FC<InferProps<import("./propTypes").PerformancesRenderRadarChart.propTypes>>}
- * @returns {React.ReactElement} The graph
+ * @param { Performances } connected user's performances
+ * @return { HTMLElement } the radarchart
  */
 function PerformancesRenderRadarChart({ performanceDatas }) {
 	function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
@@ -38,7 +41,14 @@ function PerformancesRenderRadarChart({ performanceDatas }) {
 }
 
 PerformancesRenderRadarChart.propTypes = {
-	performanceDatas: PropTypes.array.isRequired,
+	performanceDatas: PropTypes.arrayOf(
+		PropTypes.oneOfType([
+			PropTypes.shape({
+				value: PropTypes.number.isRequired,
+				kind: PropTypes.string.isRequired,
+			}),
+		]),
+	),
 };
 
 export default PerformancesRenderRadarChart;

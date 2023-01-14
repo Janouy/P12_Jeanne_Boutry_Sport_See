@@ -1,6 +1,6 @@
 import { UserAverageSessions } from "../../models/userAverageSessions";
-const { REACT_APP_AVERAGE_SESSIONS_MOCK } = process.env;
-const { REACT_APP_AVERAGE_SESSIONS_API } = process.env;
+const { REACT_APP_API_URL } = process.env;
+const user = 12;
 
 /**
  * Download data from the specified URL.
@@ -12,8 +12,8 @@ const { REACT_APP_AVERAGE_SESSIONS_API } = process.env;
 
 async function getUserAverageSessions() {
 	try {
-		const response = await fetch(REACT_APP_AVERAGE_SESSIONS_MOCK);
-		//const response = await fetch(REACT_APP_AVERAGE_SESSIONS_API);
+		const response = await fetch(`${REACT_APP_API_URL}/user/${user}/average-sessions`);
+		console.log(`${REACT_APP_API_URL}/user/${user}/average-session`);
 		const sessionsData = await response.json();
 		const userAverageSessions = new UserAverageSessions(sessionsData.data.id, sessionsData.data.sessions);
 		return userAverageSessions;

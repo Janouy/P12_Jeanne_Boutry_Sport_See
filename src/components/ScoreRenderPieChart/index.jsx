@@ -4,10 +4,15 @@ import { PieChart, Pie, Cell, Label } from "recharts";
 import styles from "./style.module.css";
 
 /**
+ * A number, or a string containing a number.
+ * @typedef {array} LastScore
+ * @typedef {number} WinddowSize
+ */
+/**
  * Component to show a piechart graph representing user's daily percent score
- * @component
- * @type {React.FC<InferProps<import("./propTypes").ScoreRenderPieChart.propTypes>>}
- * @returns {React.ReactElement} The graph
+ * @param { LastScore } connected user's daily score
+ * @param { WinddowSize } get the window size
+ * @return { HTMLElement } the piechart
  */
 function ScoreRenderPieChart({ lastScore, windowSize }) {
 	const innerPie = [{ name: "innerPie", value: 100 }];
@@ -58,7 +63,15 @@ function ScoreRenderPieChart({ lastScore, windowSize }) {
 }
 
 ScoreRenderPieChart.propTypes = {
-	lastScore: PropTypes.array.isRequired,
+	lastScore: PropTypes.arrayOf(
+		PropTypes.oneOfType([
+			PropTypes.shape({
+				name: PropTypes.string.isRequired,
+				value: PropTypes.number.isRequired,
+			}),
+		]),
+	),
+	windowSize: PropTypes.number.isRequired,
 };
 
 export default ScoreRenderPieChart;

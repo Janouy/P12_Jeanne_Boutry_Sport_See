@@ -1,7 +1,6 @@
 import { UserActivities } from "../../models/userActivities";
-const { REACT_APP_ACTIVITY_MOCK } = process.env;
-const { REACT_APP_ACTIVITY_API } = process.env;
-
+const { REACT_APP_API_URL } = process.env;
+const user = 12;
 /**
  * Download data from the specified URL.
  *
@@ -12,7 +11,7 @@ const { REACT_APP_ACTIVITY_API } = process.env;
 
 async function getActivitiesData() {
 	try {
-		const response = await fetch(REACT_APP_ACTIVITY_MOCK);
+		const response = await fetch(`${REACT_APP_API_URL}/user/${user}/activity`);
 		//const response = await fetch(REACT_APP_ACTIVITY_API);
 		const activityData = await response.json();
 
