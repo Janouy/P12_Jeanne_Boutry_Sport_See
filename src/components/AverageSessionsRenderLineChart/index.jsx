@@ -5,9 +5,8 @@ import styles from "./style.module.css";
 
 /**
  * Component to show a linechart graph representing user's sport average sessions's duration
- * @component
- * @type {React.FC<InferProps<import("./propTypes").AverageSessionsRenderLineChart.propTypes>>}
- * @returns {React.ReactElement} The graph
+ * @prop { array } connected user's sport average sessions's duration
+ * @return { HTMLElement } the linechart
  */
 function AverageSessionsRenderLineChart({ sessions }) {
 	function CustomTooltip({ payload, active }) {
@@ -85,7 +84,14 @@ function AverageSessionsRenderLineChart({ sessions }) {
 }
 
 AverageSessionsRenderLineChart.propTypes = {
-	sessions: PropTypes.array.isRequired,
+	sessions: PropTypes.arrayOf(
+		PropTypes.oneOfType([
+			PropTypes.shape({
+				day: PropTypes.string.isRequired,
+				sessionLength: PropTypes.number.isRequired,
+			}),
+		]),
+	),
 };
 
 export default AverageSessionsRenderLineChart;

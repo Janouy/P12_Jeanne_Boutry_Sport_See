@@ -1,11 +1,11 @@
 /**
- * @class representing one user's activity
+ * @class representing user's daily activity
  */
 
 export class UserActivities {
 	/**
-	 * @param {number} user's id
-	 * @param {array} user's sport daily sessions
+	 * @param {number} id - user's id
+	 * @param {array} sessions - user's sport daily activity
 	 */
 	constructor(userId, sessions) {
 		this.userId = userId;
@@ -14,10 +14,10 @@ export class UserActivities {
 
 	/**
 	 * Get sessions values.
-	 * @return {array} user's sport sessions values
+	 * @return {{day: number, kilogram: number, calories: number}[]} user's sport daily sessions values
 	 */
 	getFormatedActivitySessions() {
-		//sort sessions in chronological order
+		//sorts sessions in chronological order
 		let sortedSessions = this.sessions.sort(function (a, b) {
 			return new Date(a.day) - new Date(b.day);
 		});
@@ -28,7 +28,6 @@ export class UserActivities {
 		}
 		//replacing chronological dates by nummbers 1 to 10
 		sortedSessions.forEach((session, index) => (session["day"] = index + 1));
-
 		return sortedSessions;
 	}
 }

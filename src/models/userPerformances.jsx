@@ -4,9 +4,9 @@
 
 export class UserPerformances {
 	/**
-	 * @param {number} user's id
-	 * @param {object} kind of perfomances
-	 * @param {array} user's performances value
+	 * @param {number} id - user's id
+	 * @param {object} kind - type of performed activities
+	 * @param {array} data - user's performances value per kind of activity
 	 */
 	constructor(userId, kind, data) {
 		this.userId = userId;
@@ -16,7 +16,7 @@ export class UserPerformances {
 
 	/**
 	 * Get data values.
-	 * @return {array} user's performances values
+	 * @return {{kind: string, value: number}[]} user's performances values with kind of activity
 	 */
 	getFormatedPerformancesDatas() {
 		//order datas by kind

@@ -4,10 +4,9 @@ import "./style.css";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 /**
- * Component to show a barChart graph representing user's sport acitivties
- * @component
- * @type {React.FC<InferProps<import("./propTypes").ActivitiesRenderBarChart.propTypes>>}
- * @returns {React.ReactElement} The graph
+ * Component to show a barChart graph representing user's sport acitivty
+ * @prop { array } connected user's sport daily activity
+ * @return { HTMLElement } the barChart
  */
 function ActivitiesRenderBarChart({ activitiesDatas }) {
 	const legendText = ["Poids (Kg)", "Calories brûlées (kCal)"];
@@ -84,7 +83,15 @@ function ActivitiesRenderBarChart({ activitiesDatas }) {
 	);
 }
 ActivitiesRenderBarChart.propTypes = {
-	activitiesDatas: PropTypes.array.isRequired,
+	performanceDatas: PropTypes.arrayOf(
+		PropTypes.oneOfType([
+			PropTypes.shape({
+				day: PropTypes.number.isRequired,
+				kilogram: PropTypes.number.isRequired,
+				calories: PropTypes.number.isRequired,
+			}),
+		]),
+	),
 };
 
 export default ActivitiesRenderBarChart;

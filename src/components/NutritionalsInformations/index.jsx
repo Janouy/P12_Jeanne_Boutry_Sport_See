@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import styles from "./style.module.css";
 
 /**
- * Display the connected user's nutritional informations
- * @param { array } connected user's nutritionals informations
- * @return { HTMLElement }
+ * Display the connected user's nutritional informations in a card
+ * @param { Array} connected user's nutritionals informations
+ * @return { HTMLElement } a card with the nutritinal infos name and its informations ans its icon
  */
 function NutritionalsInformations({ KeyData }) {
 	return (
@@ -26,7 +26,15 @@ function NutritionalsInformations({ KeyData }) {
 }
 
 NutritionalsInformations.propTypes = {
-	KeyData: PropTypes.array.isRequired,
+	KeyData: PropTypes.arrayOf(
+		PropTypes.oneOfType([
+			PropTypes.shape({
+				data: PropTypes.string.isRequired,
+				icon: PropTypes.string.isRequired,
+				name: PropTypes.string.isRequired,
+			}),
+		]),
+	),
 };
 
 export default NutritionalsInformations;

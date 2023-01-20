@@ -1,11 +1,11 @@
 /**
- * @class representing one user's activity
+ * @class representing user's daily average sessions's duration
  */
 
 export class UserAverageSessions {
 	/**
-	 * @param {number} user's id
-	 * @param {array} user's daily sessions
+	 * @param {number} id - user's id
+	 * @param {array} sessions - user's daily average sessions's duration
 	 */
 	constructor(userId, sessions) {
 		this.userId = userId;
@@ -14,7 +14,7 @@ export class UserAverageSessions {
 
 	/**
 	 * Get sessions values.
-	 * @return {array} user's daily sessions values
+	 * @return {{day: string, sessionLength: number}[]} user's daily sessions values
 	 */
 	getFormatedAverageSessions() {
 		const sessionsAddDays = [];

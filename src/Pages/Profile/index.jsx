@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import styles from "./style.module.css";
 import ActivitiesRenderBarChart from "../../components/ActivitiesRenderBarChart";
 import AverageSessionsRenderLineChart from "../../components/AverageSessionsRenderLineChart";
@@ -13,6 +14,7 @@ import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformance
  * @return { HTMLElement } With React components
  */
 function Profile() {
+	const userId = useParams();
 	const [isInfosLoading, setIsInfosLoading] = useState(true);
 	const [isActivityLoading, setIsActivityLoading] = useState(true);
 	const [isSessionsLoading, setIsSessionsLoading] = useState(true);
@@ -35,7 +37,7 @@ function Profile() {
 	}, [windowSize, getScreenSize]);
 
 	useEffect(() => {
-		getUsersData()
+		getUsersData(userId.id)
 			.then((data) => setUsersData(data))
 			.catch(function (error) {
 				console.error(error);
@@ -43,7 +45,7 @@ function Profile() {
 			.finally(function () {
 				setIsInfosLoading(false);
 			});
-		getActivitiesData()
+		getActivitiesData(userId.id)
 			.then((data) => setUserActivityData(data))
 			.catch(function (error) {
 				console.error(error);
@@ -51,7 +53,7 @@ function Profile() {
 			.finally(function () {
 				setIsActivityLoading(false);
 			});
-		getUserAverageSessions()
+		getUserAverageSessions(userId.id)
 			.then((data) => setUsersAverageSessionsData(data))
 			.catch(function (error) {
 				console.error(error);
@@ -59,7 +61,7 @@ function Profile() {
 			.finally(function () {
 				setIsSessionsLoading(false);
 			});
-		getPerformancesData()
+		getPerformancesData(userId.id)
 			.then((data) => setUsersPerformancesData(data))
 			.catch(function (error) {
 				console.error(error);
@@ -67,7 +69,7 @@ function Profile() {
 			.finally(function () {
 				setIsPerformancesLoading(false);
 			});
-	}, []);
+	}, [userId.id]);
 
 	return (
 		<div className={`${styles.profileWrapper} container`}>
@@ -103,7 +105,7 @@ function Profile() {
 							<Loader />
 						) : (
 							<ScoreRenderPieChart
-								lastScore={usersData.getDailyScoreInPercent()}
+								averageScore={usersData.getDailyScoreInPercent()}
 								windowSize={windowSize}
 							/>
 						)}

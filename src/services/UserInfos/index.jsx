@@ -1,17 +1,17 @@
 import { UserInformations } from "../../models/userInformations";
 const { REACT_APP_API_URL } = process.env;
-const user = 12;
+
 /**
- * Download data from the specified URL.
+ * Download user's informations data from the specified URL.
  *
  * @async
  * @function getUsersData
- * @return {Promise<object>} The data from the URL.
+ * @return {Promise<object>} The user's informations data from the URL.
  */
 
-async function getUsersData() {
+async function getUsersData(connectedUserId) {
 	try {
-		const response = await fetch(`${REACT_APP_API_URL}/user/${user}`);
+		const response = await fetch(`${REACT_APP_API_URL}/user/${connectedUserId}`);
 		const userData = await response.json();
 		const userInfos = new UserInformations(
 			userData.data.id,

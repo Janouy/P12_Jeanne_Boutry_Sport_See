@@ -4,17 +4,13 @@ import { PieChart, Pie, Cell, Label } from "recharts";
 import styles from "./style.module.css";
 
 /**
- * A number, or a string containing a number.
- * @typedef {array} LastScore
- * @typedef {number} WinddowSize
- */
-/**
- * Component to show a piechart graph representing user's daily percent score
- * @param { LastScore } connected user's daily score
- * @param { WinddowSize } get the window size
+ * Component showing a piechart graph representing user's average score
+ * @prop { object } connected user's average score
+ * @prop { number } the window size
  * @return { HTMLElement } the piechart
  */
-function ScoreRenderPieChart({ lastScore, windowSize }) {
+
+function ScoreRenderPieChart({ averageScore, windowSize }) {
 	const innerPie = [{ name: "innerPie", value: 100 }];
 	const COLORS = ["#e60000", "#FBFBFB"];
 
@@ -22,7 +18,7 @@ function ScoreRenderPieChart({ lastScore, windowSize }) {
 		<div className={styles.pieChart}>
 			<PieChart width={windowSize >= 1440 ? 260 : 200} height={windowSize >= 1440 ? 260 : 200}>
 				<Pie
-					data={lastScore}
+					data={averageScore}
 					cx="50%"
 					cy="50%"
 					startAngle={90}
@@ -32,7 +28,7 @@ function ScoreRenderPieChart({ lastScore, windowSize }) {
 					cornerRadius={40}
 					stroke={"#FBFBFB"}
 				>
-					{lastScore.map((entry, index) => (
+					{averageScore.map((entry, index) => (
 						<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
 					))}
 				</Pie>
@@ -48,7 +44,7 @@ function ScoreRenderPieChart({ lastScore, windowSize }) {
 					label={"none"}
 				>
 					<Label
-						value={`${lastScore[0]["value"]}%`}
+						value={`${averageScore[0]["value"]}%`}
 						position="centerBottom"
 						className="label-top"
 						fontSize={"26px"}
@@ -63,7 +59,7 @@ function ScoreRenderPieChart({ lastScore, windowSize }) {
 }
 
 ScoreRenderPieChart.propTypes = {
-	lastScore: PropTypes.arrayOf(
+	averageScore: PropTypes.arrayOf(
 		PropTypes.oneOfType([
 			PropTypes.shape({
 				name: PropTypes.string.isRequired,

@@ -3,25 +3,25 @@ import Protein from "../assets/protein-icon.png";
 import Carbs from "../assets/carbs-icon.png";
 import Fat from "../assets/fat-icon.png";
 /**
- * @class representing an user
+ * @class representing user's informations
  */
 
 export class UserInformations {
 	/**
-	 * @param {number} user's id
-	 * @param {object} user's informations
-	 * @param {number} user's lastScore
-	 * @param {object} user's nutritionals informations
+	 * @param {number} id - user's id
+	 * @param {Object} userInfos - user's personal informations
+	 * @param {number} averageScore - user's average score
+	 * @param {Object} keyData - user's nutritionals informations
 	 */
-	constructor(id, userInfos, lastScore, keyData) {
+	constructor(id, userInfos, averageScore, keyData) {
 		this.id = id;
 		this.userInfos = userInfos;
+		this.averageScore = averageScore;
 		this.keyData = keyData;
-		this.lastScore = lastScore;
 	}
 
 	/**
-	 * Get the firstname value.
+	 * Get the user's firstname value.
 	 * @return {string} user's firstname value.
 	 */
 	getFirstName() {
@@ -36,8 +36,8 @@ export class UserInformations {
 	}
 
 	/**
-	 * Transform user's keyDatas
-	 * @return {array} The aray of keydata value.
+	 * Get user's keyDatas
+	 * @return {{data: string, icon: string}[]} The aray of keydata value.
 	 */
 	getKeyDatas() {
 		return [
@@ -48,13 +48,13 @@ export class UserInformations {
 		];
 	}
 	/**
-	 * Get the last score value.
-	 * @return {array} user's lastScore percent and user's purpose percent
+	 * Get the average score value.
+	 * @return {{name: string, value: number}[]} user's average score in percent and user's score purpose in percent
 	 */
 	getDailyScoreInPercent() {
 		return [
-			{ name: "score", value: this.lastScore * 100 },
-			{ name: "purpose", value: 100 - this.lastScore * 100 },
+			{ name: "score", value: this.averageScore * 100 },
+			{ name: "purpose", value: 100 - this.averageScore * 100 },
 		];
 	}
 }
