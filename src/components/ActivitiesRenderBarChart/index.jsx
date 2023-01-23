@@ -18,8 +18,9 @@ function ActivitiesRenderBarChart({ activitiesDatas }) {
 	//find the max weight, round up to the next ten to end the domain
 	const maxWeight =
 		roundNumber * Math.ceil(Math.max(...activitiesDatas.map((data) => data["kilogram"])) / roundNumber);
-	//find how many data is there ton set the tickCount
+	//find how many data is there to set the tickCount
 	const tickCount = new Set(activitiesDatas.map((data) => data["kilogram"]));
+	// add caption to bar hover
 	function CustomTooltip({ payload, active }) {
 		if (active) {
 			return (

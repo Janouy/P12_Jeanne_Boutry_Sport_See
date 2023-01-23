@@ -16,7 +16,7 @@ async function getUsersData(connectedUserId) {
 		const userInfos = new UserInformations(
 			userData.data.id,
 			userData.data.userInfos,
-			userData.data.todayScore || userData.score,
+			userData.data.todayScore || userData.data.score,
 			userData.data.keyData,
 		);
 		return userInfos;

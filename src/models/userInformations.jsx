@@ -36,8 +36,8 @@ export class UserInformations {
 	}
 
 	/**
-	 * Get user's keyDatas
-	 * @return {{data: string, icon: string}[]} The aray of keydata value.
+	 * Get user's nutritionals keyDatas
+	 * @return {{data: string, icon: string}[]} The aray of nutritionals keydata value.
 	 */
 	getKeyDatas() {
 		return [

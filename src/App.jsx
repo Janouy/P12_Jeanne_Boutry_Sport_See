@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
 	const navigate = useNavigate();
+	// TODO delete this code when the login system is operational
 	useEffect(() => {
 		return navigate("/12");
 	}, [navigate]);

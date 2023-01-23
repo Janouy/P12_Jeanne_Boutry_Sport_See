@@ -13,6 +13,7 @@ import styles from "./style.module.css";
  * @return { HTMLElement } the radarchart
  */
 function PerformancesRenderRadarChart({ performanceDatas }) {
+	// define the spacing of the different types of activity
 	function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
 		return (
 			<Text {...rest} verticalAnchor="middle" y={y + (y - cy) / 10} x={x + (x - cx) / -10}>

@@ -9,6 +9,7 @@ import styles from "./style.module.css";
  * @return { HTMLElement } the linechart
  */
 function AverageSessionsRenderLineChart({ sessions }) {
+	// add caption to row hover
 	function CustomTooltip({ payload, active }) {
 		if (active) {
 			return (
@@ -48,7 +49,6 @@ function AverageSessionsRenderLineChart({ sessions }) {
 						<Tooltip
 							offset="20"
 							cursor={false}
-							//cursor={{ stroke: "#e60000", strokeWidth: 80 }}
 							content={<CustomTooltip />}
 							wrapperStyle={{ outline: "none" }}
 						/>
