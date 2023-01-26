@@ -7,6 +7,8 @@ import PerformancesRenderRadarChart from "../../components/PerformancesRenderRad
 import NutritionalsInformations from "../../components/NutritionalsInformations";
 import ScoreRenderPieChart from "../../components/ScoreRenderPieChart";
 import Loader from "../../components/Loader";
+import NavBar from "../../components/NavBar";
+import VerticalBar from "../../components/VerticalBar";
 import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformancesData } from "../../services";
 
 /**
@@ -72,50 +74,56 @@ function Profile() {
 	}, [userId.id]);
 
 	return (
-		<div className={`${styles.profileWrapper} container`}>
-			<div className={`${styles.welcomeUser}`}>
-				<span>Bonjour</span>
-				<span className={styles.userName}>{isInfosLoading ? <Loader /> : usersData.getFirstName()}</span>
-				<br />
-				<span className={styles.feliz}>Félicitation ! Vous avez explosé vos objectifs hier 👏 </span>
-			</div>
-			<div className={`${styles.profile} row`}>
-				<div className={`${styles.graphs} col-9 d-flex flex-column justify-content-between`}>
-					{isActivityLoading ? (
-						<Loader />
-					) : (
-						<ActivitiesRenderBarChart activitiesDatas={userActivityData.getFormatedActivitySessions()} />
-					)}
-					<div className="d-flex justify-content-between mt-2 mt-xl-5">
-						{isSessionsLoading ? (
+		<>
+			<NavBar />
+			<VerticalBar />
+			<div className={`${styles.profileWrapper} container`}>
+				<div className={`${styles.welcomeUser}`}>
+					<span>Bonjour</span>
+					<span className={styles.userName}>{isInfosLoading ? <Loader /> : usersData.getFirstName()}</span>
+					<br />
+					<span className={styles.feliz}>Félicitation ! Vous avez explosé vos objectifs hier 👏 </span>
+				</div>
+				<div className={`${styles.profile} row`}>
+					<div className={`${styles.graphs} col-9 d-flex flex-column justify-content-between`}>
+						{isActivityLoading ? (
 							<Loader />
 						) : (
-							<AverageSessionsRenderLineChart
-								sessions={usersAverageSessionsData.getFormatedAverageSessions()}
+							<ActivitiesRenderBarChart
+								activitiesDatas={userActivityData.getFormatedActivitySessions()}
 							/>
 						)}
-						{isPerformancesLoading ? (
-							<Loader />
-						) : (
-							<PerformancesRenderRadarChart
-								performanceDatas={usersPerformancesData.getFormatedPerformancesDatas()}
-							/>
-						)}
-						{isInfosLoading ? (
-							<Loader />
-						) : (
-							<ScoreRenderPieChart
-								averageScore={usersData.getDailyScoreInPercent()}
-								windowSize={windowSize}
-							/>
-						)}
+						<div className="d-flex justify-content-between mt-2 mt-xl-5">
+							{isSessionsLoading ? (
+								<Loader />
+							) : (
+								<AverageSessionsRenderLineChart
+									sessions={usersAverageSessionsData.getFormatedAverageSessions()}
+								/>
+							)}
+							{isPerformancesLoading ? (
+								<Loader />
+							) : (
+								<PerformancesRenderRadarChart
+									performanceDatas={usersPerformancesData.getFormatedPerformancesDatas()}
+								/>
+							)}
+							{isInfosLoading ? (
+								<Loader />
+							) : (
+								<ScoreRenderPieChart
+									averageScore={usersData.getDailyScoreInPercent()}
+									windowSize={windowSize}
+								/>
+							)}
+						</div>
+					</div>
+					<div className={`${styles.keyDataWrapper} col-3`}>
+						{isInfosLoading ? <Loader /> : <NutritionalsInformations KeyData={usersData.getKeyDatas()} />}
 					</div>
 				</div>
-				<div className={`${styles.keyDataWrapper} col-3`}>
-					{isInfosLoading ? <Loader /> : <NutritionalsInformations KeyData={usersData.getKeyDatas()} />}
-				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
