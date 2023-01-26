@@ -1,0 +1,13 @@
+.logo {
+	margin-top: 50px;
+}
+.text {
+	margin-top: 150px;
+	margin-bottom: 150px;
+}
+.link {
+	text-decoration: none;
+	color: #000;
+	cursor: pointer;
+	font-size: 18px;
+}

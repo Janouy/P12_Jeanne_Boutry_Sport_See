@@ -6,6 +6,7 @@ import AverageSessionsRenderLineChart from "../../components/AverageSessionsRend
 import PerformancesRenderRadarChart from "../../components/PerformancesRenderRadarChart";
 import NutritionalsInformations from "../../components/NutritionalsInformations";
 import ScoreRenderPieChart from "../../components/ScoreRenderPieChart";
+import Error from "../../components/Error/index";
 import Loader from "../../components/Loader";
 import NavBar from "../../components/NavBar";
 import VerticalBar from "../../components/VerticalBar";
@@ -18,6 +19,7 @@ import { getUsersData, getUserAverageSessions, getActivitiesData, getPerformance
 function Profile() {
 	const userId = useParams();
 	const [isInfosLoading, setIsInfosLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
 	const [isActivityLoading, setIsActivityLoading] = useState(true);
 	const [isSessionsLoading, setIsSessionsLoading] = useState(true);
 	const [isPerformancesLoading, setIsPerformancesLoading] = useState(true);
@@ -42,7 +44,7 @@ function Profile() {
 		getUsersData(userId.id)
 			.then((data) => setUsersData(data))
 			.catch(function (error) {
-				console.error(error);
+				setIsError(true);
 			})
 			.finally(function () {
 				setIsInfosLoading(false);
@@ -50,7 +52,7 @@ function Profile() {
 		getActivitiesData(userId.id)
 			.then((data) => setUserActivityData(data))
 			.catch(function (error) {
-				console.error(error);
+				setIsError(true);
 			})
 			.finally(function () {
 				setIsActivityLoading(false);
@@ -58,7 +60,7 @@ function Profile() {
 		getUserAverageSessions(userId.id)
 			.then((data) => setUsersAverageSessionsData(data))
 			.catch(function (error) {
-				console.error(error);
+				setIsError(true);
 			})
 			.finally(function () {
 				setIsSessionsLoading(false);
@@ -66,13 +68,16 @@ function Profile() {
 		getPerformancesData(userId.id)
 			.then((data) => setUsersPerformancesData(data))
 			.catch(function (error) {
-				console.error(error);
+				setIsError(true);
 			})
 			.finally(function () {
 				setIsPerformancesLoading(false);
 			});
 	}, [userId.id]);
 
+	if (isError) {
+		return <Error />;
+	}
 	return (
 		<>
 			<NavBar />
